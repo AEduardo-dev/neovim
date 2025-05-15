@@ -33,34 +33,6 @@ return {
     },
   },
 
-  -- Modify todo-comments
-  {
-    -- TODO: remove once https://github.com/folke/todo-comments.nvim/pull/255 is merged
-    "LunarLambda/todo-comments.nvim",
-    branch = "enhanced-matching",
-    opts = {
-      highlight = {
-        keyword = "bg",
-        pattern = {
-          -- NOTE(xyz):
-          [[.*<((KEYWORDS)%(\(.{-1,}\))?:)]],
-          -- TODO 123:
-          [[.*<((KEYWORDS)%(\s+\d+)?:)]],
-        },
-      },
-    },
-  },
-  -- {
-  --   "folke/todo-comments.nvim",
-  --   opts = {
-  --     highlight = {
-  --       keyword = "bg",
-  --       -- add extra pattern for `KEYWORD(AUTHOR):`
-  --       pattern = { [[.*<(KEYWORDS)\s*:]], [[.*<(KEYWORDS)\s*[(][^)]*[)]:]] },
-  --     },
-  --   },
-  -- },
-
   -- Modify `flash.nvim`
   {
     "folke/flash.nvim",

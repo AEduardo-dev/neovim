@@ -1,1 +1,0 @@
-return { { "lspcontainers/lspcontainers.nvim" } }

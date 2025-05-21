@@ -5,13 +5,6 @@ local ufo_utils = require("utils._ufo")
 local ufo_config_handler = ufo_utils.handler
 local lspconfig = require("lspconfig")
 
-mason.setup({
-  ui = {
-    -- The border to use for the UI window. Accepts same border values as |nvim_open_win()|.
-    border = EcoVim.ui.float.border or "rounded",
-  },
-})
-
 mason_lsp.setup({
   -- A list of servers to automatically install if they're not already installed
   ensure_installed = {
@@ -35,16 +28,13 @@ mason_lsp.setup({
   automatic_installation = true,
 })
 
-
 local handlers = {
   ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
     silent = true,
-    border = EcoVim.ui.float.border,
   }),
-  ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = EcoVim.ui.float.border }),
 }
 
-local capabilities = require('blink.cmp').get_lsp_capabilities()
+local capabilities = require("blink.cmp").get_lsp_capabilities()
 
 local function on_attach(client, bufnr)
   vim.lsp.inlay_hint.enable(true, { bufnr })
@@ -54,20 +44,19 @@ end
 local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
 function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
   opts = opts or {}
-  opts.border = opts.border or EcoVim.ui.float.border or "rounded" -- default to EcoVim border
   return orig_util_open_floating_preview(contents, syntax, opts, ...)
 end
 
-require("mason-lspconfig").setup_handlers {
+require("mason-lspconfig").setup_handlers({
   -- The first entry (without a key) will be the default handler
   -- and will be called for each installed server that doesn't have
   -- a dedicated handler.
   function(server_name)
-    require("lspconfig")[server_name].setup {
+    require("lspconfig")[server_name].setup({
       on_attach = on_attach,
       capabilities = capabilities,
       handlers = handlers,
-    }
+    })
   end,
 
   ["ts_ls"] = function()
@@ -149,8 +138,8 @@ require("mason-lspconfig").setup_handlers {
       on_attach = require("config.lsp.servers.vuels").on_attach,
       settings = require("config.lsp.servers.vuels").settings,
     })
-  end
-}
+  end,
+})
 
 require("ufo").setup({
   fold_virt_text_handler = ufo_config_handler,

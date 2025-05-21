@@ -28,7 +28,7 @@ local codes = {
     "redefined-local",
     "no-duplicate-imports",
     "@typescript-eslint/no-redeclare",
-    "import/no-duplicates"
+    "import/no-duplicates",
   },
   no_matching_variable = {
     message = " Can't find that variable",
@@ -45,7 +45,7 @@ local codes = {
     icon = "󰂭  ",
     "unused-local",
     "@typescript-eslint/no-unused-vars",
-    "no-unused-vars"
+    "no-unused-vars",
   },
   unused_function = {
     message = "  Don't define functions you don't use",
@@ -75,8 +75,8 @@ local codes = {
   -- Prettier
   prettier = {
     icon = "  ",
-    "prettier/prettier"
-  }
+    "prettier/prettier",
+  },
 }
 
 vim.diagnostic.config({
@@ -86,17 +86,17 @@ vim.diagnostic.config({
       local code = diagnostic and diagnostic.user_data and diagnostic.user_data.lsp.code
 
       if not diagnostic.source or not code then
-        return string.format('%s', diagnostic.message)
+        return string.format("%s", diagnostic.message)
       end
 
-      if diagnostic.source == 'eslint' then
+      if diagnostic.source == "eslint" then
         for _, table in pairs(codes) do
           if vim.tbl_contains(table, code) then
-            return string.format('%s [%s]', table.icon .. diagnostic.message, code)
+            return string.format("%s [%s]", table.icon .. diagnostic.message, code)
           end
         end
 
-        return string.format('%s [%s]', diagnostic.message, code)
+        return string.format("%s [%s]", diagnostic.message, code)
       end
 
       for _, table in pairs(codes) do
@@ -105,23 +105,20 @@ vim.diagnostic.config({
         end
       end
 
-      return string.format('%s [%s]', diagnostic.message, diagnostic.source)
-    end
+      return string.format("%s [%s]", diagnostic.message, diagnostic.source)
+    end,
   },
   severity_sort = true,
   signs = {
     text = {
-      [vim.diagnostic.severity.ERROR] = '',
-      [vim.diagnostic.severity.WARN] = '',
-      [vim.diagnostic.severity.INFO] = '',
-      [vim.diagnostic.severity.HINT] = '',
-    }
+      [vim.diagnostic.severity.ERROR] = "",
+      [vim.diagnostic.severity.WARN] = "",
+      [vim.diagnostic.severity.INFO] = "",
+      [vim.diagnostic.severity.HINT] = "",
+    },
   },
   underline = true,
   update_in_insert = false,
-  virtual_text = {
-    prefix = EcoVim.icons.circle,
-  },
 })
 
 -- UI
@@ -130,5 +127,3 @@ local lspui_ok, lspui = pcall(require, 'lspconfig.ui.windows')
 if not lspui_ok then
   return
 end
-
-lspui.default_options.border = EcoVim.ui.float.border or 'rounded'

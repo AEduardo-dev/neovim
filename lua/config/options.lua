@@ -1,31 +1,94 @@
--- Options are automatically loaded before lazy.nvim startup
--- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
--- Add any additional options here
---
-local opt = vim.opt
+local options = {
+  clipboard      = "unnamed,unnamedplus",   --- Copy-paste between vim and everything else
+  cmdheight      = 0,                       --- Give more space for displaying messages
+  completeopt    = "menu,menuone,preview", --- Better autocompletion
+  cursorline     = true,                    --- Highlight of current line
+  emoji          = false,                   --- Fix emoji display
+  expandtab      = true,                    --- Use spaces instead of tabs
+  foldcolumn     = "0",
+  foldnestmax    = 0,
+  foldlevel      = 99,                      --- Using ufo provider need a large value
+  foldlevelstart = 99,                      --- Expand all folds by default
+  ignorecase     = true,                    --- Needed for smartcase
+  laststatus     = 3,                       --- Have a global statusline at the bottom instead of one for each window
+  mouse          = "a",                     --- Enable mouse
+  number         = true,                    --- Shows current line number
+  pumheight      = 10,                      --- Max num of items in completion menu
+  relativenumber = true,                    --- Enables relative number
+  scrolloff      = 8,                       --- Always keep space when scrolling to bottom/top edge
+  shiftwidth     = 2,                       --- Change a number of space characters inserted for indentation
+  showtabline    = 2,                       --- Always show tabs
+  signcolumn     = "yes:2",                 --- Add extra sign column next to line number
+  smartcase      = true,                    --- Uses case in search
+  smartindent    = true,                    --- Makes indenting smart
+  smarttab       = true,                    --- Makes tabbing smarter will realize you have 2 vs 4
+  softtabstop    = 2,                       --- Insert 2 spaces for a tab
+  splitright     = true,                    --- Vertical splits will automatically be to the right
+  swapfile       = false,                   --- Swap not needed
+  tabstop        = 2,                       --- Insert 2 spaces for a tab
+  termguicolors  = true,                    --- Correct terminal colors
+  timeoutlen     = 200,                     --- Faster completion (cannot be lower than 200 because then commenting doesn't work)
+  undofile       = true,                    --- Sets undo to file
+  updatetime     = 100,                     --- Faster completion
+  viminfo        = "'1000",                 --- Increase the size of file history
+  wildignore     = "*node_modules/**",      --- Don't search inside Node.js modules (works for gutentag)
+  wrap           = false,                   --- Display long lines as just one line
+  writebackup    = false,                   --- Not needed
+  -- Neovim defaults
+  autoindent     = true,                    --- Good auto indent
+  backspace      = "indent,eol,start",      --- Making sure backspace works
+  backup         = false,                   --- Recommended by coc
+  --- Concealed text is completely hidden unless it has a custom replacement character defined (needed for dynamically showing tailwind classes)
+  conceallevel   = 2,
+  concealcursor  = "",                      --- Set to an empty string to expand tailwind class when on cursorline
+  encoding       = "utf-8",                 --- The encoding displayed
+  errorbells     = false,                   --- Disables sound effect for errors
+  fileencoding   = "utf-8",                 --- The encoding written to file
+  incsearch      = true,                    --- Start searching before pressing enter
+  showmode       = false,                   --- Don't show things like -- INSERT -- anymore
+}
 
--- Indent
-opt.autoindent = true -- Copy indent from current line when starting a new line (When <CR> or 'o' or 'O')
-opt.smarttab = true -- When on, a <Tab> in front of a line inserts blanks according to 'shiftwidth'
+local globals = {
+  mapleader                   = ' ',        --- Map leader key to SPC
+  maplocalleader              = ',',        --- Map local leader key to comma
+  speeddating_no_mappings     = 1,          --- Disable default mappings for speeddating
+}
 
--- Set this for ToggleTerm terminals to not be discarded when closed
-opt.hidden = true
+vim.opt.shortmess:append('c');
+vim.opt.formatoptions:remove('c');
+vim.opt.formatoptions:remove('r');
+vim.opt.formatoptions:remove('o');
+vim.opt.fillchars:append('stl: ');
+vim.opt.fillchars:append('eob: ');
+vim.opt.fillchars:append('fold: ');
+vim.opt.fillchars:append('foldopen: ');
+vim.opt.fillchars:append('foldsep: ');
+vim.opt.fillchars:append('foldclose:');
+vim.opt.fillchars:append('vert:▕');
+vim.opt.fillchars:append('vertleft:▕');
 
--- Set fold level, so that folds are open when entering buffer
--- opt.foldcolumn = "1"
--- opt.foldlevel = 99
--- opt.foldlevelstart = 99
--- vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+for k, v in pairs(options) do
+  vim.opt[k] = v
+end
 
--- Set eventignore so that tmux does not show `activity` every time we change from a window with Neovim
-opt.eventignore = "FocusLost"
+for k, v in pairs(globals) do
+  vim.g[k] = v
+end
 
--- Add `cursor` due to a problem in `last_loc` LazyVim's autocmd after recent update
-opt.viewoptions = "folds,cursor"
--- LSP Server to use for Python.
--- Set to "basedpyright" to use basedpyright instead of pyright.
-vim.g.lazyvim_python_lsp = "pyright"
--- Set to "ruff_lsp" to use the old LSP implementation version.
-vim.g.lazyvim_python_ruff = "ruff"
--- Set correct docstring type for Python
-vim.g.doge_doc_standard_python = "google"
+if vim.g.neovide then
+  vim.opt.title = true
+  vim.opt.guifont = EcoVim.ui.font
+  vim.g.neovide_scale_factor = 1.1
+  vim.g.neovide_refresh_rate = 144
+  vim.g.neovide_underline_stroke_scale = 0.5
+  vim.g.neovide_input_use_logo = 1
+  vim.g.neovide_input_macos_option_key_is_meta = 'only_left'
+  vim.g.neovide_window_blurred = true
+  vim.g.neovide_floating_blur_amount_x = 2.0
+  vim.g.neovide_floating_blur_amount_y = 2.0
+  vim.g.neovide_transparency = 0.95
+
+  vim.keymap.set({ 'n', 'v' }, '<D-c>', '"+y')  -- Copy
+  vim.keymap.set({ 'n', 'v' }, '<D-v>', '"*p')  -- Paste normal/visual mode
+  vim.keymap.set({ 'c', 'i' }, '<D-v>', '<C-R>+') -- Paste command/insert mode
+end

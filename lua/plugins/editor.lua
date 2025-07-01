@@ -42,27 +42,27 @@ return {
   -- Modify `flash.nvim`
   {
     "folke/flash.nvim",
-    -- keys = {
-    --   -- Disable default mappings, cuz they conflict with `vim-surround`
-    --   { "s", mode = { "n", "x", "o" }, false },
-    --   { "S", mode = { "n", "x", "o" }, false },
-    --   {
-    --     "m",
-    --     mode = { "n", "x", "o" },
-    --     function()
-    --       require("flash").jump()
-    --     end,
-    --     desc = "Flash",
-    --   },
-    --   {
-    --     "M",
-    --     mode = { "n", "o", "x" },
-    --     function()
-    --       require("flash").treesitter()
-    --     end,
-    --     desc = "Flash Treesitter",
-    --   },
-    -- },
+    keys = {
+      -- Disable default mappings, cuz they conflict with `vim-surround`
+      { "s", mode = { "n", "x", "o" }, false },
+      { "S", mode = { "n", "x", "o" }, false },
+      {
+        "m",
+        mode = { "n", "x", "o" },
+        function()
+          require("flash").jump()
+        end,
+        desc = "Flash",
+      },
+      {
+        "M",
+        mode = { "n", "o", "x" },
+        function()
+          require("flash").treesitter()
+        end,
+        desc = "Flash Treesitter",
+      },
+    },
     opts = {
       modes = {
         -- Modify options used by `flash` when doing `f`, `F`, `t`, `T` motions
@@ -71,43 +71,5 @@ return {
         },
       },
     },
-  },
-
-  -- Try out `fzf-lua`
-  {
-    "ibhagwan/fzf-lua",
-    cmd = "FzfLua",
-    opts = function(_, opts)
-      -- INFO:
-      --  ╭──────────────────────────────────────────────────────────────────────────╮
-      --  │ Use this instead of `keymap.builtin` and `keymap.fzf`, because if you    │
-      --  │ declare the keybindings in those tables, they will override the defaults │
-      --  │ and you need to add the default missing ones.                            │
-      --  ╰──────────────────────────────────────────────────────────────────────────╯
-
-      -- opts.keymap = vim.tbl_deep_extend("force", require("fzf-lua").defaults.keymap, {
-      --   fzf = {
-      --     ["ctrl-q"] = "select-all+accept",
-      --   },
-      -- })
-      opts.winopts = {
-        on_create = function()
-          vim.keymap.set("t", "<C-d>", function()
-            require("fzf-lua.win").preview_scroll("line-down")
-          end, { buffer = 0, noremap = true })
-          vim.keymap.set("t", "<C-u>", function()
-            require("fzf-lua.win").preview_scroll("line-up")
-          end, { buffer = 0, noremap = true })
-          vim.keymap.set("t", "<A-d>", function()
-            require("fzf-lua.win").preview_scroll("page-down")
-          end, { buffer = 0, noremap = true })
-          vim.keymap.set("t", "<A-u>", function()
-            require("fzf-lua.win").preview_scroll("page-up")
-          end, { buffer = 0, noremap = true })
-          vim.keymap.set("t", "<C-j>", "<down>", { buffer = 0, noremap = true })
-          vim.keymap.set("t", "<C-k>", "<up>", { buffer = 0, noremap = true })
-        end,
-      }
-    end,
   },
 }

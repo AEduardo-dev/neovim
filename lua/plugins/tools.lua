@@ -64,22 +64,6 @@ return {
     },
   },
 
-  -- Better diffing
-  {
-    "sindrets/diffview.nvim",
-    -- stylua: ignore start
-    cmd = {
-      "DiffviewOpen", "DiffviewClose", "DiffviewToggleFiles", "DiffviewFocusFiles",
-      "DiffviewFileHistory", "DiffviewRefresh"
-    },
-    -- stylua: ignore end
-    config = true,
-    keys = {
-      { "<leader>gd", "<cmd>DiffviewOpen<cr>", desc = "DiffView" },
-      { "<leader>gD", "<cmd>DiffviewFileHistory %<cr>", desc = "DiffviewFileHistory Current File" },
-    },
-  },
-
   -- markdown preview
   {
     "toppair/peek.nvim",
@@ -122,19 +106,6 @@ return {
       { "gD", "<cmd>Glance definitions<cr>", desc = "Goto Definitions (Glance)" },
       { "gR", "<cmd>Glance references<cr>", desc = "Goto References (Glance)" },
     },
-  },
-
-  -- Better surround for vim-visual-multi
-  -- {
-  --   "tpope/vim-surround",
-  --   event = "LazyFile",
-  -- },
-
-  -- Observe how it behaves with vim-visual-multi instead of vim-surround
-  {
-    "kylechui/nvim-surround",
-    event = "LazyFile",
-    opts = {},
   },
 
   -- Better qflist??

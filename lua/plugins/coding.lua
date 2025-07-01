@@ -3,8 +3,8 @@ return {
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
-      -- { "Exafunction/codeium.vim" },
-      { "roobert/tailwindcss-colorizer-cmp.nvim", config = true },
+      { "Exafunction/codeium.vim" },
+      { "roobert/tailwindcss-colorizer-cmp.nvim", opts = {} },
       {
         "windwp/nvim-autopairs",
         opts = {
@@ -22,7 +22,7 @@ return {
     opts = function(_, opts)
       local cmp = require("cmp")
       local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-      -- local types = require("cmp.types")
+      local types = require("cmp.types")
 
       -- Function to sort LSP snippets, so that they appear at the end of LSP suggestions
       -- local function deprioritize_snippet(entry1, entry2)

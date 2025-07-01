@@ -46,22 +46,6 @@ return {
     event = "BufRead",
   },
 
-  -- Better `git commit`
-  {
-    "rhysd/committia.vim",
-    -- event = "BufRead",
-    cond = function()
-      return vim.loop.fs_stat(vim.loop.cwd() .. "/.git") or vim.fn.finddir(".git", ";") ~= ""
-    end,
-    init = function()
-      vim.g.committia_min_window_width = 130
-      vim.g.committia_edit_window_width = 60
-    end,
-    keys = {
-      { "<leader>gC", "<cmd>call committia#open('git')<cr>", desc = "Open Committia" },
-    },
-  },
-
   -- `gh`-like behavior from inside Neovim
   {
     "pwntester/octo.nvim",

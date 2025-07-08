@@ -30,7 +30,24 @@ return {
           },
         },
       },
-      yamlls = {},
+      yamlls = {
+        settings = {
+          yaml = {
+            validate = true,
+            hover = true,
+            completion = true,
+            customTags = {
+              "!reference scalar",
+              "!reference mapping",
+              "!reference sequence",
+            },
+            schemas = {
+              -- GitLab CI schema:
+              ["https://gitlab.com/gitlab-org/gitlab/-/raw/master/app/assets/javascripts/editor/schema/ci.json"] = "/.gitlab-ci.yml",
+            },
+          },
+        },
+      },
       tsserver = {
         -- Need to disable this cuz `Inline Edit` won't work otherwise
         single_file_support = false,

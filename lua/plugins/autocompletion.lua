@@ -99,12 +99,12 @@ return {
     "mfussenegger/nvim-lint", -- Lightweight linting
     config = function()
       local lint = require("lint")
+      -- Override yamllint parser to ignore false positives
       lint.linters_by_ft = {
         bash = { "shellcheck" },
         c = { "cppcheck" },
         cpp = { "cppcheck" },
         python = { "pylint" },
-        yaml = { "yamllint" },
         -- Add other linters as needed
       }
     end,

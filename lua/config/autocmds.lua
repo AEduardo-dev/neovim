@@ -251,6 +251,15 @@ autocmd({ "User" }, {
   end,
 })
 
+autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = "debian/rules",
+  callback = function()
+    vim.bo.expandtab = false
+    vim.bo.tabstop = 8
+    vim.bo.shiftwidth = 8
+  end,
+})
+
 --[[ -------------
      USER COMMANDS
      ------------- ]]

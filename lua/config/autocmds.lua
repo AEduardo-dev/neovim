@@ -260,6 +260,15 @@ autocmd({ "BufRead", "BufNewFile" }, {
   end,
 })
 
+autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = { "*.c", ".h", ".cpp", ".hpp" },
+  callback = function()
+    vim.bo.expandtab = true
+    vim.bo.tabstop = 4
+    vim.bo.shiftwidth = 4
+  end,
+})
+
 --[[ -------------
      USER COMMANDS
      ------------- ]]

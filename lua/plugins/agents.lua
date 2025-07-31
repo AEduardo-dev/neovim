@@ -8,10 +8,8 @@ return {
       {
         "echasnovski/mini.diff",
         config = function()
-          local diff = require("mini.diff")
-          diff.setup({
-            -- Disabled by default
-            source = diff.gen_source.none(),
+          require("mini.diff").setup({
+            source = require("mini.diff").gen_source.none(),
           })
         end,
       },
@@ -33,58 +31,50 @@ return {
       },
     },
     opts = {
-      --Refer to: https://github.com/olimorris/codecompanion.nvim/blob/main/lua/codecompanion/config.lua
+      display = {
+        diff = {
+          enabled = true,
+          close_chat_at = 240, -- Close an open chat buffer if the total columns of your display are less than...
+          layout = "vertical", -- vertical|horizontal split for default provider
+          opts = { "internal", "filler", "closeoff", "algorithm:patience", "followwrap", "linematch:120" },
+          provider = "default", -- default|mini_diff
+        },
+      },
       strategies = {
-        --NOTE: Change the adapter as required
         chat = {
           adapter = "copilot",
           model = "claude-sonnet-4-20250514",
           keymaps = {
-            send = {
-              modes = { n = "<C-s>", i = "<C-s>" },
-              opts = {},
-            },
-            close = {
-              modes = { n = "<C-c>", i = "<C-c>" },
-              opts = {},
-            },
-            -- Add further custom keymaps here
+            send = { modes = { n = "<C-s>", i = "<C-s>" }, opts = {} },
+            close = { modes = { n = "<C-c>", i = "<C-c>" }, opts = {} },
           },
           slash_commands = {
-            ["file"] = {
-              -- Location to the slash command in CodeCompanion
+            file = {
               callback = "strategies.chat.slash_commands.file",
               description = "Select a file using Telescope",
               opts = {
-                provider = "snacks", -- Can be "default", "telescope", "fzf_lua", "mini_pick" or "snacks"
+                provider = "snacks",
                 contains_code = true,
               },
             },
           },
-          -- Change the default icons
           icons = {
             buffer_pin = " ",
             buffer_watch = "👀 ",
           },
-
-          -- Alter the sizing of the debug window
           debug_window = {
-            ---@return number|fun(): number
             width = vim.o.columns - 5,
-            ---@return number|fun(): number
             height = vim.o.lines - 2,
           },
-
-          -- Options to customize the UI of the chat buffer
           window = {
-            layout = "vertical", -- float|vertical|horizontal|buffer
-            position = nil, -- left|right|top|bottom (nil will default depending on vim.opt.splitright|vim.opt.splitbelow)
+            layout = "vertical",
+            position = nil,
             border = "single",
             height = 0.8,
             width = 0.45,
             relative = "editor",
-            full_height = true, -- when set to false, vsplit will be used to open the chat buffer vs. botright/topleft vsplit
-            sticky = false, -- when set to true and `layout` is not `"buffer"`, the chat buffer will remain opened when switching tabs
+            full_height = true,
+            sticky = false,
             opts = {
               breakindent = true,
               cursorcolumn = false,
@@ -98,20 +88,13 @@ return {
               wrap = true,
             },
           },
-
-          ---Customize how tokens are displayed
-          ---@param tokens number
-          ---@param adapter CodeCompanion.Adapter
-          ---@return string
-          token_count = function(tokens, adapter)
+          token_count = function(tokens, _)
             return " (" .. tokens .. " tokens)"
           end,
         },
         inline = { adapter = "copilot", model = "claude-sonnet-4-20250514" },
       },
-      opts = {
-        log_level = "DEBUG",
-      },
+      log_level = "DEBUG",
     },
   },
 }

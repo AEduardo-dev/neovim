@@ -9,26 +9,16 @@ local map = vim.keymap.set
 -- local del = vim.keymap.del
 
 local opts = { noremap = true, silent = true }
-local snacks =
-  -- general keymaps for development
-  -- Mappings.
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
-  -- map("n", "<C-k>", function()
-  --   require("lsp_signature").toggle_float_win()
-  -- end, { silent = true, noremap = true, desc = "toggle signature" })
-  --
-  -- map("n", "<Leader>k", function()
-  --   vim.lsp.buf.signature_help()
-  -- end, { silent = true, noremap = true, desc = "toggle signature" })
-  -- Move line up
-  map({ "n", "v" }, "<A-S-Up>", ":m .-2<CR>==", { silent = true, noremap = true, desc = "Move line up" })
+
+-- Move line up
+map({ "n", "v" }, "<A-S-Up>", ":m .-2<CR>==", opts)
 
 -- Move line down
-map({ "n", "v" }, "<A-S-Down>", ":m .+1<CR>==", { silent = true, noremap = true, desc = "Move line down" })
+map({ "n", "v" }, "<A-S-Down>", ":m .+1<CR>==", opts)
 
 -- For visual mode
-map("x", "<A-S-Down>", ":move '>+1<CR>gv-gv", { silent = true, noremap = true, desc = "Move selected lines down" })
-map("x", "<A-S-Up>", ":move '<-2<CR>gv-gv", { silent = true, noremap = true, desc = "Move selected lines up" })
+map("x", "<A-S-Down>", ":move '>+1<CR>gv-gv", opts)
+map("x", "<A-S-Up>", ":move '<-2<CR>gv-gv", opts)
 
 --     ╭───────────────────────────────────────────────────────────────────╮
 --     │                           Visual-multi                            │
@@ -81,14 +71,9 @@ map("t", "<Esc><Esc>", [[<C-\><C-n>0]])
 --     │                     Move to tabs convienently                     │
 --     ╰───────────────────────────────────────────────────────────────────╯
 map("n", "<leader>1", "1gt", { desc = "Move to tab 1" })
-map("n", "<leader>2", "2gt", { desc = "Move to tab 2" })
-map("n", "<leader>3", "3gt", { desc = "Move to tab 3" })
-map("n", "<leader>4", "4gt", { desc = "Move to tab 4" })
-map("n", "<leader>5", "5gt", { desc = "Move to tab 5" })
-map("n", "<leader>6", "6gt", { desc = "Move to tab 6" })
-map("n", "<leader>7", "7gt", { desc = "Move to tab 7" })
-map("n", "<leader>8", "8gt", { desc = "Move to tab 8" })
-map("n", "<leader>9", "9gt", { desc = "Move to tab 9" })
+for i = 1, 9 do
+  map("n", "<leader>" .. i, i .. "gt", { desc = "Move to tab " .. i })
+end
 
 --     ╭───────────────────────────────────────────────────────────────────╮
 --     │                 Close buffer and window together                  │
@@ -161,6 +146,14 @@ map("n", "<leader>ve", ":VenvSelect<CR>", { noremap = true, silent = true, desc 
 -- vim.api.nvim_set_keymap('n', '<leader>v1', ':VenvActivate /path/to/venv1<CR>', { noremap = true, silent = true, desc = "Activate specific Python virtual environment" })
 -- vim.api.nvim_set_keymap('n', '<leader>v2', ':VenvActivate /path/to/venv2<CR>', { noremap = true, silent = true, desc = "Activate specific Python virtual environment" })
 
+-- Code Companion
+map({ "n", "v" }, "<C-a>", "<cmd>CodeCompanionActions<cr>", { noremap = true, silent = true })
+map({ "n", "v" }, "<leader>a", "<cmd>CodeCompanionChat Toggle<cr>", { noremap = true, silent = true })
+map("v", "ga", "<cmd>CodeCompanionChat Add<cr>", { noremap = true, silent = true })
+-- Expand 'cc' into 'CodeCompanion' in the command line
+vim.cmd([[cab cc CodeCompanion]])
+
+-- Expand 'cc' into 'CodeCompanion'
 --     ╭───────────────────────────────────────────────────────────────────╮
 --     │                 Word/Line Completion with Codeium                 │
 --     ╰───────────────────────────────────────────────────────────────────╯

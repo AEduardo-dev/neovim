@@ -34,10 +34,10 @@ return {
       display = {
         diff = {
           enabled = true,
-          close_chat_at = 240, -- Close an open chat buffer if the total columns of your display are less than...
-          layout = "vertical", -- vertical|horizontal split for default provider
+          close_chat_at = 240,
+          layout = "vertical",
           opts = { "internal", "filler", "closeoff", "algorithm:patience", "followwrap", "linematch:120" },
-          provider = "default", -- default|mini_diff
+          provider = "default",
         },
       },
       strategies = {
@@ -68,7 +68,6 @@ return {
           },
           window = {
             layout = "vertical",
-            position = nil,
             border = "single",
             height = 0.8,
             width = 0.45,
@@ -92,7 +91,10 @@ return {
             return " (" .. tokens .. " tokens)"
           end,
         },
-        inline = { adapter = "copilot", model = "claude-sonnet-4-20250514" },
+        inline = {
+          adapter = "copilot",
+          model = "claude-sonnet-4-20250514",
+        },
       },
       log_level = "DEBUG",
     },

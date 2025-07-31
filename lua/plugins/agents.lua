@@ -45,7 +45,7 @@ return {
           adapter = "copilot",
           model = "claude-sonnet-4-20250514",
           keymaps = {
-            send = { modes = { n = "<C-s>", i = "<C-s>" }, opts = {} },
+            send = { modes = { n = "<C-s>", i = "<CR>" }, opts = {} },
             close = { modes = { n = "<C-c>", i = "<C-c>" }, opts = {} },
           },
           slash_commands = {

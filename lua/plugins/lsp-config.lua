@@ -17,6 +17,7 @@ return {
       -- virtual_text = false,
     },
     servers = {
+      clangd = {},
       nil_ls = {},
       rust_analyzer = {
         settings = {

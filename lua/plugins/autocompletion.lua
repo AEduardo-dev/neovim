@@ -58,8 +58,8 @@ return {
   {
     "neovim/nvim-lspconfig",
     dependencies = {
-      "williamboman/mason.nvim", -- Easily install and manage LSP servers
-      "williamboman/mason-lspconfig.nvim", -- Bridge between lspconfig and Mason
+      "mason-org/mason.nvim", -- Easily install and manage LSP servers
+      "mason-org/mason-lspconfig.nvim", -- Bridge between lspconfig and Mason
     },
     config = function()
       require("mason").setup()

@@ -12,7 +12,6 @@ return {
         { "[c", "Jump to previous diff change" },
         { "<leader>cl", group = "LSP" },
         { "<leader>T", group = "Terminal" },
-        { "<leader>z", group = "Zoom" },
       },
     },
   },

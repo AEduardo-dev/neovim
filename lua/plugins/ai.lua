@@ -1,7 +1,7 @@
 return {
-  -- GitHub Copilot for autosuggestions
+  -- GitHub Copilot for autosuggestion
   {
-    "zbirenbaum/copilot.nvim",
+    "zbirenbaum/copilot.lua",
     cmd = "Copilot",
     build = ":Copilot auth",
     event = "InsertEnter",
@@ -62,7 +62,7 @@ return {
     opts = {
       provider = "copilot",
       behaviour = {
-        auto_suggestions = false, -- Disable avante autosuggestions to prevent conflicts
+        auto_suggestions = false, -- Disable avante autosuggestion to prevent conflicts
         auto_set_highlight_group = true,
         auto_set_keymaps = true,
         auto_apply_diff_after_generation = false,

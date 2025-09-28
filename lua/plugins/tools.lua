@@ -64,49 +64,9 @@ return {
     },
   },
 
-  -- markdown preview
-  {
-    "toppair/peek.nvim",
-    pin = true,
-    build = "deno task --quiet build:fast",
-    keys = {
-      {
-        "<leader>pp",
-        function()
-          local peek = require("peek")
-          if peek.is_open() then
-            peek.close()
-          else
-            peek.open()
-          end
-        end,
-        desc = "Peek (Markdown Preview)",
-      },
-    },
-    opts = { theme = "dark" },
-  },
 
-  -- which-key namespace
-  {
-    "folke/which-key.nvim",
-    opts = {
-      spec = {
-        ["<leader>p"] = { name = "+peek" },
-      },
-    },
-  },
 
-  -- Glance at definitions, refs, etc a la VS Code
-  {
-    "DNLHC/glance.nvim",
-    -- event = "BufReadPre",
-    event = "LazyFile",
-    config = true,
-    keys = {
-      { "gD", "<cmd>Glance definitions<cr>", desc = "Goto Definitions (Glance)" },
-      { "gR", "<cmd>Glance references<cr>", desc = "Goto References (Glance)" },
-    },
-  },
+
 
   -- Better qflist??
   {

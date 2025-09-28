@@ -3,7 +3,6 @@ return {
   {
     "hrsh7th/nvim-cmp",
     dependencies = {
-      { "Exafunction/codeium.vim" },
       { "roobert/tailwindcss-colorizer-cmp.nvim", opts = {} },
       {
         "windwp/nvim-autopairs",

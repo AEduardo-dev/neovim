@@ -61,7 +61,6 @@ return {
     version = false, -- set this if you want to always pull the latest change
     opts = {
       provider = "copilot",
-      auto_suggestions = false, -- Don't conflict with copilot autosuggestions
       behaviour = {
         auto_suggestions = false, -- Disable avante autosuggestions to prevent conflicts
         auto_set_highlight_group = true,
@@ -84,7 +83,7 @@ return {
           accept = "<M-l>",
           next = "<M-]>",
           prev = "<M-[>",
-          dismiss = "<C-]>",
+          dismiss = "<C-/>",
         },
         jump = {
           next = "]]",
